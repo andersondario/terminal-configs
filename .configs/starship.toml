@@ -1,0 +1,137 @@
+# ~/.config/starship.toml
+
+# Define the overall prompt format
+format = """
+$directory $git_branch $git_status $kubernetes $cmd_duration $line_break $character
+"""
+
+# Battery module configuration
+[battery]
+full_symbol = "🔋"
+charging_symbol = "🔌"
+discharging_symbol = "⚡"
+
+[[battery.display]]
+threshold = 30
+style = "bold red"
+
+# Character module configuration
+[character]
+error_symbol = "[✖](bold red) "
+symbol = "❯"
+style = "bold blue"
+
+# Command duration module configuration
+[cmd_duration]
+min_time = 10_000  # Show command duration over 10,000 milliseconds (=10 sec)
+format = " took [$duration]($style)"
+
+# Directory module configuration
+[directory]
+truncation_length = 5
+format = "[$path]($style)[$lock_symbol]($lock_style)"
+
+# Git branch module configuration
+[git_branch]
+format = " [$symbol$branch]($style) "
+symbol = "🍣 "
+style = "bold yellow"
+
+# Git commit module configuration
+[git_commit]
+commit_hash_length = 8
+style = "bold white"
+
+# Git state module configuration
+[git_state]
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+
+# Git status module configuration
+[git_status]
+conflicted = "⚔️ "
+ahead = "🏎️ 💨 ×${count} "
+behind = "🐢 ×${count} "
+diverged = "🔱 🏎️ 💨 ×${ahead_count} 🐢 ×${behind_count} "
+untracked = "🛤️  ×${count} "
+stashed = "📦 "
+modified = "📝 ×${count} "
+staged = "🗃️  ×${count} "
+renamed = "📛 ×${count} "
+deleted = "🗑️  ×${count} "
+style = "bright-white"
+format = "$all_status$ahead_behind"
+
+# Hostname module configuration
+[hostname]
+ssh_only = false
+format = "<[$hostname]($style)>"
+trim_at = "-"
+style = "bold dimmed white"
+disabled = true
+
+# Julia module configuration
+[julia]
+format = "[$symbol$version]($style) "
+symbol = "ஃ "
+style = "bold green"
+
+# Memory usage module configuration
+[memory_usage]
+format = "$symbol[${ram}( | ${swap})]($style) "
+threshold = 70
+style = "bold dimmed white"
+disabled = false
+
+# Package module configuration
+[package]
+disabled = true
+
+# Python module configuration
+[python]
+format = "[$symbol$version]($style) "
+symbol = "🐍 "
+style = "bold green"
+
+# Rust module configuration
+[rust]
+format = "[$symbol$version]($style) "
+symbol = "🦀 "
+style = "bold green"
+
+# Time module configuration
+[time]
+time_format = "%T"
+format = "🕙 $time($style) "
+style = "bright-white"
+disabled = false
+
+# Typst module configuration
+[typst]
+format = "[$symbol($version)]($style)"
+style = "bold #239dae"
+
+# Username module configuration
+[username]
+style_user = "bold dimmed blue"
+show_always = false
+
+# Node.js module configuration
+[nodejs]
+format = "via [🤖 $version](bold green) "
+
+# AWS module configuration
+[aws]
+disabled = true
+
+# Docker module configuration
+[docker]
+disabled = true
+
+# Docker context module configuration
+[docker_context]
+disabled = true
+
+# Kubernetes module configuration
+[kubernetes]
+disabled = false
+format = " 🛠️  Context: [$context](bold blue) [$namespace](bold yellow)"

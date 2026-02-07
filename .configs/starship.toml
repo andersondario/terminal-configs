@@ -2,8 +2,12 @@
 
 # Define the overall prompt format
 format = """
-$directory $git_branch $git_status $kubernetes $cmd_duration $line_break $character
+$directory $git_branch $git_status $kubernetes $cmd_duration $memory_usage $line_break $time $character
 """
+
+# Performance settings
+command_timeout = 500       # Prevent hangs on large repos
+scan_timeout = 30           # Timeout for git scanning
 
 # Battery module configuration
 [battery]
@@ -17,9 +21,8 @@ style = "bold red"
 
 # Character module configuration
 [character]
+success_symbol = "❯"
 error_symbol = "[✖](bold red) "
-symbol = "❯"
-style = "bold blue"
 
 # Command duration module configuration
 [cmd_duration]
@@ -48,6 +51,8 @@ format = '[\($state( $progress_current of $progress_total)\)]($style) '
 
 # Git status module configuration
 [git_status]
+disabled = false
+windows_starship = null
 conflicted = "⚔️ "
 ahead = "🏎️ 💨 ×${count} "
 behind = "🐢 ×${count} "
@@ -100,8 +105,9 @@ style = "bold green"
 
 # Time module configuration
 [time]
+use_12hr = false
 time_format = "%T"
-format = "🕙 $time($style) "
+format = "🕙 [$time]($style) "
 style = "bright-white"
 disabled = false
 
@@ -123,10 +129,6 @@ format = "via [🤖 $version](bold green) "
 [aws]
 disabled = true
 
-# Docker module configuration
-[docker]
-disabled = true
-
 # Docker context module configuration
 [docker_context]
 disabled = true
@@ -135,3 +137,5 @@ disabled = true
 [kubernetes]
 disabled = false
 format = " 🛠️  Context: [$context](bold blue) [$namespace](bold yellow)"
+disabled_by_path = ["**/node_modules", "**/.venv", "**/venv"]
+disabled_by_branch = ["."]
